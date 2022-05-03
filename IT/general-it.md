@@ -1,0 +1,8 @@
+## 1. Computers and Systems ##
+
+- Real-time operating system: A  real-time operating system (RTOS) is an operating system (OS) for real-time applications that processes data and events that have critically defined time constraints. An RTOS is distinct from a time sharing operating system, such as Unix, which manages the sharing of system resources with a scheduler, data buffers, or fixed task prioritization in a multitasking or multiprogramming environment. Processing time requirements need to be fully understood and bound rather than just kept as a minimum. All processing must occur within the defined constraints. Real-time operating systems are event-driven and preemptive, meaning the OS is capable of monitoring the relevant priority of competing tasks, and make changes to the task priority. Event-driven systems switch between tasks based on their priorities, while time-sharing systems switch the task based on clock interrupts. https://en.wikipedia.org/wiki/Real-time_operating_system
+    - An RTOS is an operating system in which the time taken to process an input stimulus is less than the time lapsed until the next input stimulus of the same type.
+    The most common designs are:
+    Event-driven – switches tasks only when an event of higher priority needs servicing; called preemptive priority, or priority scheduling.
+    Time-sharing – switches tasks on a regular clocked interrupt, and on events; called round robin.
+ 

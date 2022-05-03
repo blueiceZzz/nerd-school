@@ -1,0 +1,3 @@
+- choose the best language to use:
+    - choose the right language for each task, choosing the wrong tool is almost just shooting yourself in the foot, speeding more time on it without getting a good maintability and performance
+    - also try to find out what tech stack has been used in your organization and what you need to do, which is also pretty important

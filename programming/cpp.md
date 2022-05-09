@@ -1,9 +1,18 @@
-## 	0. Configuration & Compilation
+## 	0. Configuration & /Compilation
 
 - C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\bin\Hostx64\x64\cl.exe
 - Cusomize formatting in VSCode: https://stackoverflow.com/questions/45823734/visual-studio-code-formatting-for
 - Compiler path: Compiler:C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/cl.exe
 - When you want to compile with cl.exe, open "Developer command prompt for VS 2022" -> cd /d "C:\0Workspace\Jobsuche\coding-interview" -> code . . In this way, the path and environment for cl.exe gets set correctly
+- c compilation process: with example with gcc https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
+    - pre-processing: output as *.i file. Source file is filled with lots and lots of info, but at the end our code is preserved. 
+       - Removal of Comments
+       - Expansion of Macros
+       - Expansion of the included files.
+       - Conditional compilation
+    - compiling: intermediate compiled output file filename.s. This file is in assembly level instructions. Although the step of generating assembly code is somtimes hidden by the compiler.
+    - assembly (optional): In this phase the filename.s is taken as input and turned into filename.o by assembler. This file contain machine level instructions. At this phase, only existing code is converted into machine language, the function calls like printf() are not resolved.
+    - linking: This is the final phase in which all the linking of function calls with their definitions are done. Linker knows where all these functions are implemented. Linker does some extra work also, it adds some extra code to our program which is required when the program starts and ends. For example, there is a code which is required for setting up the environment like passing command line arguments. This task can be easily verified by using $size filename.o and $size filename.
 
 ## 1. C++ language generals
 
@@ -165,6 +174,9 @@ bItr->first; / bItr->second;
 
     In the C standard library and in POSIX specifications, the identifier for the typedef definition is often suffixed with _t, such as in size_t and time_t. This is practiced in other coding systems, although POSIX explicitly reserves this practice for POSIX data types. 
 - *.h and *:hpp file: use *.hpp for *.cpp file, then you can tell from file extension, which language the class / lib is implemented in. *.h is c/c++ compatible: https://stackoverflow.com/questions/152555/h-or-hpp-for-your-class-definitions
+- std::pair<class T1, class T2>: std::pair is a class template that provides a way to store two heterogeneous objects as a single unit. A pair is a specific case of a std::tuple with two elements. https://en.cppreference.com/w/cpp/utility/pair
+- std::tuple: Class template std::tuple is a fixed-size collection of heterogeneous values. It is a generalization of std::pair. https://en.cppreference.com/w/cpp/utility/tuple
+- std::set: is an associative container that contains a sorted set of unique objects of type Key. Sorting is done using the key comparison function Compare. Search, removal, and insertion operations have logarithmic complexity. Sets are usually implemented as red-black trees.
 
 ## 3. Algos and Performance ##
 

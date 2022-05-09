@@ -1,3 +1,19 @@
+## 1. Computing and Performance
+
+- stack memory: each process gets assigned its own memory, where it can initialize its own stack and heap memory: https://cs.stackexchange.com/questions/129114/how-does-the-os-handle-multiple-stacks-in-its-physical-memory
+
+## 2. Different Languages
+
 - choose the best language to use:
     - choose the right language for each task, choosing the wrong tool is almost just shooting yourself in the foot, speeding more time on it without getting a good maintability and performance
     - also try to find out what tech stack has been used in your organization and what you need to do, which is also pretty important
+- Language generations:
+    - first generation: machine code: still not binary, but cloest to it
+        - In computer programming, machine code is any low-level programming language, consisting of machine language instructions, which are used to control a computer's central processing unit (CPU). Each instruction causes the CPU to perform a very specific task, such as a load, a store, a jump, or an arithmetic logic unit (ALU) operation on one or more units of data in the CPU's registers or memory.
+        Machine code is a strictly numerical language which is designed to run as fast as possible, and may be considered as the lowest-level representation of a compiled or assembled computer program or as a primitive and hardware-dependent programming language. While it is possible to write programs directly in machine code, managing individual bits and calculating numerical addresses and constants manually is tedious and error-prone. For this reason, programs are very rarely written directly in machine code in modern contexts, but may be done for low level debugging, program patching (especially when assembler source is not available) and assembly language disassembly. https://en.wikipedia.org/wiki/Machine_code
+    - second generation: assembly code
+        - assembly language (or assembler language),[1] is any low-level programming language in which there is a very strong correspondence between the instructions in the language and the architecture's machine code instructions.[2] Assembly language usually has one statement per machine instruction (1:1), but constants, comments, assembler directives,[3] symbolic labels of, e.g., memory locations, registers, and macros[4][1] are generally also supported. 
+    - third generation: high-level languages:
+        - A third-generation programming language (3GL) is a high-level computer programming language that tends to be more machine-independent and programmer-friendly than the machine code of the first-generation and assembly languages of the second-generation, while having a less specific focus to the fourth and fifth generations.[1] Examples of common and historical third-generation programming languages are ALGOL, BASIC, C, COBOL, Fortran, Java, Javascript, and Pascal (Some advanced 3GLs like Python, Ruby, and Perl combine some 4GL abilities within a general-purpose 3GL environment,[4] and libraries with 4GL-like features have been developed as add-ons for most popular 3GLs, producing languages that are a mix of 3GL and 4GL, blurring the distinction.). 
+    - fourth generation: advancement on 3GLs:
+        - any computer programming language that belongs to a class of languages envisioned as an advancement upon third-generation programming languages (3GL). Each of the programming language generations aims to provide a higher level of abstraction of the internal computer hardware details, making the language more programmer-friendly, powerful, and versatile. Languages claimed to be 4GL may include support for database management, report generation, mathematical optimization, GUI development, or web development. Some researchers state that 4GLs are a subset of domain-specific languages

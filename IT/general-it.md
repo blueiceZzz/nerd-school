@@ -5,4 +5,6 @@
     The most common designs are:
     Event-driven – switches tasks only when an event of higher priority needs servicing; called preemptive priority, or priority scheduling.
     Time-sharing – switches tasks on a regular clocked interrupt, and on events; called round robin.
+
+- Processor register: A processor register is a quickly accessible location available to a computer's processor. Registers usually consist of a small amount of fast storage, although some registers have specific hardware functions, and may be read-only or write-only. In computer architecture, registers are typically addressed by mechanisms other than main memory, but may in some cases be assigned a memory address e.g. DEC PDP-10, ICT 1900. https://en.wikipedia.org/wiki/Processor_register
  

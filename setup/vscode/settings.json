@@ -1,0 +1,177 @@
+{
+    "python.linting.pylintArgs": [
+        "--extension-pkg-whitelist=cv2"
+    ],
+    "html.validate.styles": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.languageServer": "Pylance",
+    // "python.pythonPath": "c:\\Users\\zho7lr\\.pyenv\\pyenv-win\\versions\\3.7.6\\python.exe",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "debug.javascript.autoAttachFilter": "disabled",
+    "security.workspace.trust.untrustedFiles": "open",
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.startupPrompt": "never",
+    "editor.cursorStyle": "block",
+    "editor.cursorBlinking": "phase",
+    // "python.defaultInterpreterPath": "c:\\Users\\zho7lr\\.pyenv\\pyenv-win\\versions\\3.7.6\\python.exe",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "cSpell.userWords": [
+        "Dasem",
+        "Dyper",
+        "linalg",
+        "roscore",
+        "tparam",
+        "uvicorn"
+    ],
+    "editor.mouseWheelScrollSensitivity": 3,
+    "cSpell.logLevel": "Information",
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "diffEditor.ignoreTrimWhitespace": true,
+    "cSpell.ignoreWords": [
+        "opencv"
+    ],
+    "C_Cpp.errorSquiggles": "Disabled",
+    "cSpell.diagnosticLevel": "Hint",
+    "explorer.confirmDelete": false,
+    "bracketPairColorizer.depreciation-notice": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "debug.onTaskErrors": "debugAnyway", // for 1p debug task
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        }
+    ],
+    "window.restoreWindows": "all",
+    "cSpell.language": "en,de-de",
+    "latex-workshop.view.pdf.viewer": "external",
+    "editor.rulers": [
+        120
+    ],
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    },
+    "remote.SSH.remotePlatform": {
+        "FE-C-00429.fe.de.bosch.com": "linux",
+        "10.178.235.227": "linux",
+        "FE06-C-00038.lr.de.bosch.com": "linux"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "C_Cpp.clang_format_fallbackStyle": "none",
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "googletest.failed",
+                "settings": {
+                    "foreground": "#f00"
+                }
+            },
+            {
+                "scope": "googletest.passed",
+                "settings": {
+                    "foreground": "#0f0"
+                }
+            },
+            {
+                "scope": "googletest.run",
+                "settings": {
+                    "foreground": "#0f0"
+                }
+            }
+        ]
+    },
+    "C_Cpp.autoAddFileAssociations": false,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.commandsToSkipShell": [
+        "language-julia.interrupt"
+    ],
+    "julia.symbolCacheDownload": true,
+    "julia.enableTelemetry": false,
+    "python.formatting.provider": "black",
+    "cmake.configureOnOpen": false,
+    "editor.wordWrap": "on",
+    "hediet.vscode-drawio.resizeImages": null,
+    "hediet.vscode-drawio.theme": "sketch",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "security.allowedUNCHosts": [
+        "wsl.localhost",
+        "bosch.com",
+        "abtvdfs2.de.bosch.com"
+    ],
+    // "terminal.integrated.defaultProfile.linux": "bash",
+    "cmake.showOptionsMovedNotification": false,
+    "clangd.detectExtensionConflicts": false,
+    "remote.autoForwardPortsSource": "hybrid",
+    "window.commandCenter": false,
+    "doxdocgen.c.commentPrefix": "/// ",
+    "doxdocgen.c.firstLine": "///",
+    "doxdocgen.c.lastLine": "",
+    "julia.executablePath": "/home/zho7lr/.juliaup/bin/julia",
+    "julia.environmentPath": "/home/zho7lr/.juliaup/bin",
+    "update.showReleaseNotes": false,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "clangd.checkUpdates": false,
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+"remote.SSH.showLoginTerminal": true,
+"explorer.confirmDragAndDrop": false,
+"gitlens.home.preview.enabled": false,
+"gitTreeCompare.diffMode": "full",
+"window.title": "${rootNameShort}${separator}${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}${appName}",
+"editor.unicodeHighlight.ambiguousCharacters": false,
+"explorer.confirmPasteNative": false,
+"python.analysis.extraPaths": [
+    "app_dataset_management/auto_generated_sdk",
+    "${workspaceFolder}"
+],
+"chat.tools.terminal.autoApprove": {
+    "python": true,
+    "npm run config": true
+},
+"gitlens.ai.model": "vscode",
+"gitlens.ai.vscode.model": "copilot:gpt-4.1",
+"chat.mcp.gallery.enabled": true,
+"notebook.output.scrolling": true,
+"explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+},
+"chat.agent.maxRequests": 50,
+"git.blame.statusBarItem.enabled": false,
+"git.blame.editorDecoration.enabled": true,
+"gitlens.currentLine.enabled": false
+}

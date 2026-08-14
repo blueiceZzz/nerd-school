@@ -1,8 +1,8 @@
 # Eternal bash history
 # --------------------
 # Source this file in your ~/.bashrc:
-#   source /path/to/eternal_bash_history/bashrc_snippet.bash
-# e.g. source $HOME/bashrc_snippet.bash
+#   source /path/to/.eternal_bash_hist_snippet.bash
+# e.g. source $HOME/.eternal_bash_hist_snippet.bash
 
 # Append to the history file on exit instead of overwriting it.
 shopt -s histappend

@@ -19,7 +19,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # eternal bash history
-source $HOME/bashrc_snippet.bash
+source $HOME/.eternal_bash_hist_snippet.bash
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.

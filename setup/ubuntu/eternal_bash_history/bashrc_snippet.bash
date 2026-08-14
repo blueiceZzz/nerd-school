@@ -2,6 +2,7 @@
 # --------------------
 # Source this file in your ~/.bashrc:
 #   source /path/to/eternal_bash_history/bashrc_snippet.bash
+# e.g. source $HOME/bashrc_snippet.bash
 
 # Append to the history file on exit instead of overwriting it.
 shopt -s histappend
@@ -24,7 +25,15 @@ export HISTFILE=~/.bash_eternal_history
 # Write the current session's history to the file after every command,
 # so a crash or closed terminal never loses commands.
 # http://superuser.com/questions/20900/bash-history-loss
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# This writes your last command (-a), clears current memory (-c), and reads the fresh file (-r)
+# This is the industry-standard way to share history across terminals cleanly without duplicates.
+# PROMPT_COMMAND is still needed in some other places
+# The PROMPT_COMMAND variable is optional and is used to define a command or a series of commands that Bash executes just before displaying the primary prompt (PS1).
+if [[ -z "${PROMPT_COMMAND:-}" ]]; then
+    export PROMPT_COMMAND="history -a; history -c; history -r"
+else
+    export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+fi
 
 # Readline keybindings for history search
 # ----------------------------------------

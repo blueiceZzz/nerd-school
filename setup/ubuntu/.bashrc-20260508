@@ -8,88 +8,47 @@ case $- in
       *) return;;
 esac
 
+####################################################################################
+# BASH HISTORY
+####################################################################################
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# eternal bash history
+source $HOME/bashrc_snippet.bash
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+####################################################################################
+# PROMPT STYLE
+####################################################################################
+# Color PS1 and display git branch
+if [ -x /usr/bin/tput ] && tput setaf 1 >/dev/null 2>&1; then
+    color_prompt=yes
+else
+    color_prompt=
 fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# commented out, to see the git branch in promp from oneparking_docker_tools
-# function prompt_command {
-#     if [ -f "/run/wsl-network.status" ]; then
-#     internet_status_prompt=" | $(< /run/wsl-network.status)"
-#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h'"${internet_status_prompt}"'\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#     else
-#     unset internet_status_prompt
-#     fi
-# }
-
-# PROMPT_COMMAND is still needed in some other places
-# The PROMPT_COMMAND variable is optional and is used to define a command or a series of commands that Bash executes just before displaying the primary prompt (PS1).
-# export PROMPT_COMMAND=prompt_command # old command
-export PROMPT_COMMAND=""
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-# force_color_prompt=yes
-
-# if [ -n "$force_color_prompt" ]; then
-#     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-# 	# We have color support; assume it's compliant with Ecma-48
-# 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-# 	# a case would tend to support setf rather than setaf.)
-# 	color_prompt=yes
-#     else
-# 	color_prompt=
-#     fi
-# fi
-
-# if [ "$color_prompt" = yes ]; then
-#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h${internet_status_prompt:+$internet_status_prompt}\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# else
-#     PS1='${debian_chroot:+($debian_chroot)}\u@\h${internet_status_prompt:+$internet_status_prompt}:\w\$ '
-# fi
-# unset color_prompt force_color_prompt
-
-# # If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-# xterm*|rxvt*)
-#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#     ;;
-# *)
-#     ;;
-# esac
-
-# enable immediate history saving
-shopt -s histappend
-PROMPT_COMMAND="$PROMPT_COMMAND history -n"
+parse_git_branch() {
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+if [ "$color_prompt" = yes ]; then
+    PS1='\[\e[1;32m\]\u@\h\[\e[m\] \[\e[1;31m\]\w\[\e[m\]\[\e[1;37m\]$(parse_git_branch)\[\e[m\]\n[\D{%T}]\[\e[1;32m\] \$\[\e[m\] '
+else
+    PS1='\u@\h \w$(parse_git_branch)\n[\D{%T}] \$ '
+fi
+# Reset formatting before each command so colors do not bleed into command output.
+trap '[[ -t 1 ]] && tput sgr0' DEBUG
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -106,14 +65,23 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+####################################################################################
+# ALIAS
+####################################################################################
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
 # some more ls aliases
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
-
 # Alias for docker-compose
 alias docker-compose='docker compose'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -134,9 +102,9 @@ alias gsh='git stash'
 alias ghide='git update-index --skip-worktree'
 alias gunhide='git update-index --no-skip-worktree'
 alias ghidden='git ls-files -v | grep "^S" | sed "s/^S //"'
-
 # oneparking
-alias dti-bd='dti build linux-x86_64-gcc-8-debug --build-packages=missing'
+alias dtib='dti bazel build'
+alias dtit='dti bazel test'
 alias dti-bdao='dti build linux-x86_64-gcc-8-debug --build-packages=missing -o rbp_*:ENABLE_AOS=OFF'
 alias dti-td="dti test linux-x86_64-gcc-8-debug -ts all_test"
 alias dti-mfpbbc="dti mfpb-configure --build-check -pbc linux-x86_64-gcc-8-relwithdebinfo-aos-off"
@@ -146,15 +114,6 @@ alias testmate="./setup_testmate.sh"
 alias setcl="./setup_clangd.sh"
 alias runre="./_generated/recompute_command.sh"
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # wsl-network.service, px-proxy.service, wsl-vpnkit.service aliases
 alias network-status='sudo journalctl -u wsl-network.service -f | grep -v "sudo"'
 alias px-status='sudo journalctl -u px-proxy.service -f | grep -v "sudo"'
@@ -163,55 +122,38 @@ alias network-restart='sudo systemctl restart wsl-network.service'
 alias px-restart='sudo systemctl restart px-proxy.service'
 alias vpnkit-restart='sudo systemctl restart wsl-vpnkit.service'
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    fi
-fi
+####################################################################################
+# ACCESS TOKENS AND AUTHENTIFICATION
+####################################################################################
 
-set -a; source /etc/environment; set +a;
-
-# Add the users bin-directory to the path
-export PATH=$HOME/bin:${PATH}
-# Add bin path for python pkg, e.g. pre-commit
-export PATH="$PATH:$HOME/.local/bin"
-
-# Commands for oneparking_docker_tools
-# Source onep_completions for usage with gonep
-. /home/zho7lr/oneparking_docker_tools/docker/bash-completion/completions/onep_completion.bash
-complete -F _onep_completions gonep
-
-# Import .shared_bashrc
-if [[ -f "$HOME/.shared_bashrc" ]]; then
-  source $HOME/.shared_bashrc
-fi
-
-# Import .shared_inputrc
-if [[ -f "$HOME/.shared_inputrc" ]]; then
-  bind -f $HOME/.shared_inputrc
-fi
-
+####################################################################################
+# ONEPARKING TOOLS
+####################################################################################
 # dti API GW auto completions
-source /home/zho7lr/.bash_completions/dti.sh
+if [[ -f "$HOME/.bash_completions/dti.sh" ]]; then
+    source /home/zho7lr/.bash_completions/dti.sh
+fi
 
-# sign-in method, makes running NFM compare script easier
-export AZCOPY_AUTO_LOGIN_TYPE=AZCLI
+####################################################################################
+# PROXY AND CONNECTION
+####################################################################################
+export http_proxy="http://localhost:3128"
+export https_proxy="http://localhost:3128"
+export ftp_proxy="http://localhost:3128"
+export no_proxy='no_proxy=127.0.0.1,127.*,10.*,169.254.*,172.16.*,172.17.*,172.18.*,172.19.*,172.20.*,172.21.*,172.22.*,172.23.*,172.24.*,172.25.*,172.26.*,172.27.*,172.28.*,172.29.*,172.30.*,172.31.*,192.168.*,::1,localhost,de.bosch.com,apac.bosch.com,emea.bosch.com,us.bosch.com,rb-artifactory.bosch.com,sourcecode01.de.bosch.com,sourcecode.socialcoding.bosch.com,dev.bosch.com,sourcecode06.dev.bosch.com,osd.bosch.com'
 
+####################################################################################
+# TOOL SETUP, PATHS, AND VENV
+####################################################################################
 # change dir, if not already in ~/repos or a subfolder of it
 if [[ $(pwd) == /home/$USER ]]; then
     cd /home/$USER/repos
 fi
 
-#proxy config
-# export http_proxy="http://localhost:3128"
-# export https_proxy="http://localhost:3128"
-# export ftp_proxy="http://localhost:3128"
-export no_proxy='localhost, 127.0.0.*, 192.168.*, .local, 172.*, *.bosch.*, login.microsoftonline.com'
+# Add the users bin-directory to the path
+export PATH=$HOME/bin:${PATH}
+# Add bin path for python pkg, e.g. pre-commit
+export PATH="$PATH:$HOME/.local/bin"
 
 # PYENV setup
 export PYENV_ROOT="$HOME/.pyenv"
@@ -219,6 +161,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - bash)" # init pyenv in current shell
 eval "$(pyenv virtualenv-init -)" # Load pyenv-virtualenv automatically
 
+# PYTHON VENV
 # Auto-activate .venv if it exists in the current directory or parent directories
 auto_activate_venv() {
     local dir="$PWD"
@@ -233,12 +176,10 @@ auto_activate_venv() {
         dir="$(dirname "$dir")"
     done
 }
-
 # Run auto-activation on cd
 cd() {
     builtin cd "$@" && auto_activate_venv
 }
-
 # Auto-activate when opening a new terminal
 auto_activate_venv
 
@@ -258,8 +199,9 @@ poetry() {
     done
     command poetry "$@"
 }
-# >>> juliaup initialize >>>
 
+# JULIA
+# >>> juliaup initialize >>>
 # Ensure juliaup's Julia takes precedence over system Julia (/usr/bin/julia)
 export PATH=$HOME/.juliaup/bin:${PATH}
 # !! Contents within this block are managed by juliaup !!
@@ -274,8 +216,3 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
-
-source '/home/zho7lr/.bash_completions/dti.sh'
-
-# setup eternal bash history
-source /path/to/eternal_bash_history/bashrc_snippet.bash
